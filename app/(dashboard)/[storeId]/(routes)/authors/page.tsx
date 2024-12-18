@@ -8,21 +8,29 @@ import { AuthorColumns } from "./_components/columns";
 
 const AuthorsPage = async ({ params }: { params: { storeId: string } }) => {
   const authorsData = (
-    await getDocs(collection(doc(db, "stores", params.storeId), "Authors"))
+    await getDocs(collection(doc(db, "stores", params.storeId), "authors"))
   ).docs.map((doc) => doc.data()) as Author[];
 
   console.log(authorsData)
+  console.log("Firestore Data:", authorsData);
+console.log("Params.storeId:", params.storeId);
+
 
   const formattedAuthors: AuthorColumns[] = authorsData.map((item) => ({
     id: item.id,
     name: item.name,
     billboardLabel: item.billboardLabel,
     createdAt: item.createdAt
-      ? format(item.createdAt.toDate(), "MMMM do, yyyy")
+      ? format(new Date(item.createdAt.seconds * 1000), "MMMM do, yyyy") // Convert Firestore Timestamp
+      : "",
+    updatedAt: item.updatedAt
+      ? format(new Date(item.updatedAt.seconds * 1000), "MMMM do, yyyy") // Convert Firestore Timestamp
       : "",
   }));
 
-  console.log("Hello World");
+  
+
+  // console.log("Hello World");
 
   return (
     <div className="flex-col">

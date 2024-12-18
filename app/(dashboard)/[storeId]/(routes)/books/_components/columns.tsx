@@ -12,7 +12,7 @@ export type BookColumns = {
   isFeatured: boolean;
   isArchived: boolean;
   author: string;
-  genre: string;
+  genre: string[];
   images: { url: string }[];
   createdAt: string;
 };

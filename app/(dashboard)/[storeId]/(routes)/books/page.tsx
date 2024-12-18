@@ -19,7 +19,7 @@ const BooksPage = async ({ params }: { params: { storeId: string } }) => {
     isArchived: item.isArchived,
     isFeatured: item.isFeatured,
     author: item.author,
-    genre: item.genre,
+    genre: Array.isArray(item.genre) ? item.genre.join(", ") : item.genre || "N/A",
     images: item.images,
     createdAt: item.createdAt
       ? format(item.createdAt.toDate(), "MMMM do, yyyy")

@@ -10,16 +10,18 @@ const GenresPage = async ({ params }: { params: { storeId: string } }) => {
   const genresData = (
     await getDocs(collection(doc(db, "stores", params.storeId), "genres"))
   ).docs.map((doc) => doc.data()) as Genre[];
+  
 
   const formattedGenres: GenreColumns[] = genresData.map((item) => ({
     id: item.id,
     name: item.name,
-    value: item.value,
+    value: item.value,   //.join(', '),
     createdAt: item.createdAt
       ? format(item.createdAt.toDate(), "MMMM do, yyyy")
       : "",
+      
   }));
-
+  
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">

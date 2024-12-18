@@ -13,7 +13,7 @@ export interface Billboards {
     id: string;
     label: string;
     imageUrl: string;
-    updatedAt?: string;
+    updatedAt?: Timestamp;
     createdAt?: Timestamp;
   }
 
@@ -43,7 +43,7 @@ export interface Billboards {
     isFeatured: boolean;
     isArchived: boolean;
     author: string;
-    genre: string
+    genre: string;
     createdAt?: Timestamp;
     updatedAt?: Timestamp;
   }
